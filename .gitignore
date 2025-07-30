@@ -24,7 +24,8 @@ MANIFEST
 
 # PyInstaller
 *.manifest
-*.spec
+# Note: We keep pipepipe_tool.spec as it's our build configuration
+!pipepipe_tool.spec
 
 # Installer logs
 pip-log.txt
