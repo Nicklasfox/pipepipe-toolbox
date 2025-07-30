@@ -30,19 +30,58 @@ jobs:
       run: |
         python build_tool.py
     
+    - name: Prepare release files
+      if: startsWith(github.ref, 'refs/tags/')
+      run: |
+        # Create release directory
+        mkdir release-files
+        # Copy standalone executable
+        copy "dist\PipePipe_Metadata_Tool.exe" "release-files\"
+        # Copy distribution zip
+        copy "dist\*.zip" "release-files\"
+        # List files for verification
+        dir release-files
+    
     - name: Upload build artifacts
       uses: actions/upload-artifact@v3
       with:
         name: PipePipe-Metadata-Tool-Windows
-        path: dist/*.zip
+        path: |
+          dist/PipePipe_Metadata_Tool.exe
+          dist/*.zip
         retention-days: 30
     
     - name: Create Release
       if: startsWith(github.ref, 'refs/tags/')
       uses: softprops/action-gh-release@v1
       with:
-        files: dist/*.zip
+        files: |
+          release-files/PipePipe_Metadata_Tool.exe
+          release-files/*.zip
         generate_release_notes: true
+        body: |
+          ## PipePipe Metadata Tool Release
+          
+          ### Download Options:
+          - **PipePipe_Metadata_Tool.exe** - Standalone Windows executable (no Python required)
+          - **PipePipe_Metadata_Tool_v1.0_*.zip** - Complete package with documentation
+          
+          ### What's New:
+          - GUI application for PipePipe backup management
+          - Automatic metadata updates using yt-dlp
+          - Cleanup of unavailable videos
+          - Multilingual support (English/Swedish)
+          - Background processing with progress indication
+          
+          ### Requirements:
+          - Windows 10/11 (for .exe file)
+          - OR Python 3.7+ (for source code)
+          
+          ### How to Use:
+          1. Download the .exe file
+          2. Run PipePipe_Metadata_Tool.exe
+          3. Select your PipePipe backup file
+          4. Choose your preferred action
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

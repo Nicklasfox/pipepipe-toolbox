@@ -23,9 +23,11 @@ A user-friendly GUI application for managing PipePipe/NewPipe backup files. This
 ## Installation
 
 ### Option 1: Download Executable (Recommended for Windows users)
-1. Download the latest release from the [Releases](../../releases) page
-2. Extract the zip file
-3. Run `PipePipe_Metadata_Tool.exe`
+1. Go to the [Releases](../../releases) page
+2. Download the latest **PipePipe_Metadata_Tool.exe** file
+3. Run the executable directly - no installation required!
+
+*Alternative: Download the complete package (.zip) which includes documentation and source code.*
 
 ### Option 2: Run from Source
 1. Clone this repository:

@@ -107,6 +107,10 @@ def create_distribution():
     archive_name = f"{dist_name}.zip"
     shutil.make_archive(f"dist/{dist_name}", 'zip', f"dist/{dist_name}")
     
+    # Also create a standalone executable copy in dist root for GitHub Actions
+    if os.path.exists('dist/PipePipe_Metadata_Tool.exe'):
+        print("  ✓ Standalone executable ready for release")
+    
     if os.path.exists(f"dist/{archive_name}"):
         size = os.path.getsize(f"dist/{archive_name}")
         print(f"✓ Distribution package created: dist/{archive_name} ({size:,} bytes)")
